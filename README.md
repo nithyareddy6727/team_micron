@@ -213,10 +213,3 @@ The solution enables organizations to:
 
 ---
 
-## Author
-
-### Yashraj Thube
-
-Data Science | Machine Learning | Artificial Intelligence
-
-GitHub: https://github.com/YashrajThube
