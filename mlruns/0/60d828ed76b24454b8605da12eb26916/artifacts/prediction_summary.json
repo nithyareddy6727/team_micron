@@ -1,0 +1,9 @@
+{
+  "model_version": "churn_model_optimized-82b32a7f6e0d",
+  "customer_id": "1658-BYGOY",
+  "prediction": 1,
+  "probability": 0.995882511138916,
+  "latency_ms": 19.305899972096086,
+  "risk_level": "High",
+  "confidence_score": 0.991765022277832
+}

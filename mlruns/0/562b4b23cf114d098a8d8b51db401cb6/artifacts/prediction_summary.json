@@ -1,0 +1,9 @@
+{
+  "model_version": "churn_model_optimized-82b32a7f6e0d",
+  "customer_id": "4846-WHAFZ",
+  "prediction": 1,
+  "probability": 0.9959982633590698,
+  "latency_ms": 19.590799987781793,
+  "risk_level": "High",
+  "confidence_score": 0.9919965267181396
+}

@@ -1,0 +1,9 @@
+{
+  "model_version": "churn_model_optimized-82b32a7f6e0d",
+  "customer_id": "7495-OOKFY",
+  "prediction": 1,
+  "probability": 0.861326277256012,
+  "latency_ms": 20.713199977762997,
+  "risk_level": "High",
+  "confidence_score": 0.7226525545120239
+}

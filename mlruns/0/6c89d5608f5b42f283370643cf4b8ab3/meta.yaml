@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Nithya/Downloads/customer-churn-prediction-main/customer-churn-prediction-main/mlruns/0/6c89d5608f5b42f283370643cf4b8ab3/artifacts
+end_time: 1789635192533
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6c89d5608f5b42f283370643cf4b8ab3
+run_name: predict-4598-XLKNJ
+run_uuid: 6c89d5608f5b42f283370643cf4b8ab3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789635192477
+status: 3
+tags: []
+user_id: Nithya

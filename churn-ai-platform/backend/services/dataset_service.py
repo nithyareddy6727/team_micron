@@ -69,9 +69,20 @@ class DatasetService:
         customer_id = str(customer_id).strip()
         if not customer_id:
             return None
-        if customer_id not in self.frame.index:
-            return None
-        return self._normalize_customer_record(self.frame.loc[customer_id].to_dict())
+        if customer_id in self.frame.index:
+            return self._normalize_customer_record(self.frame.loc[customer_id].to_dict())
+
+        lower_id = customer_id.lower()
+        if hasattr(self.frame.index, "str"):
+            matches = self.frame.index[self.frame.index.astype(str).str.lower() == lower_id]
+            if not matches.empty:
+                return self._normalize_customer_record(self.frame.loc[matches[0]].to_dict())
+
+        search_res = self.search_customers(limit=1, search=customer_id)
+        if search_res.customers:
+            return search_res.customers[0]
+
+        return None
 
     def get_customer_features(self, customer_id: str) -> dict[str, Any] | None:
         customer = self.get_customer(customer_id)

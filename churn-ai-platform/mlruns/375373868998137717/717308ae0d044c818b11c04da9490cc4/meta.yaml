@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/717308ae0d044c818b11c04da9490cc4/artifacts
+end_time: 1789633711335
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: 717308ae0d044c818b11c04da9490cc4
+run_name: predict-8779-QRDMV
+run_uuid: 717308ae0d044c818b11c04da9490cc4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789633711200
+status: 4
+tags: []
+user_id: Nithya

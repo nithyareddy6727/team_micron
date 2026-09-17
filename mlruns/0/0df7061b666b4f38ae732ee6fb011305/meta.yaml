@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Nithya/Downloads/customer-churn-prediction-main/customer-churn-prediction-main/mlruns/0/0df7061b666b4f38ae732ee6fb011305/artifacts
+end_time: 1789635192224
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0df7061b666b4f38ae732ee6fb011305
+run_name: predict-7495-OOKFY
+run_uuid: 0df7061b666b4f38ae732ee6fb011305
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789635192162
+status: 3
+tags: []
+user_id: Nithya

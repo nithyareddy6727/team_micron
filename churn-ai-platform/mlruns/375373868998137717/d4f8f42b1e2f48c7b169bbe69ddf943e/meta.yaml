@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/d4f8f42b1e2f48c7b169bbe69ddf943e/artifacts
+end_time: 1789634849949
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: d4f8f42b1e2f48c7b169bbe69ddf943e
+run_name: predict-7590-VHVEG
+run_uuid: d4f8f42b1e2f48c7b169bbe69ddf943e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789634849901
+status: 4
+tags: []
+user_id: Nithya
