@@ -1,0 +1,9 @@
+{
+  "model_version": "v1",
+  "customer_id": "SMOKE-001",
+  "prediction": 0,
+  "probability": 0.499152958393097,
+  "latency_ms": 57.45430000388296,
+  "risk_level": "Medium",
+  "confidence_score": 0.0016940832138060413
+}

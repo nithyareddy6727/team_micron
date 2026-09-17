@@ -1,0 +1,13 @@
+{
+  "customer_id": "NEW-1001",
+  "age": 34,
+  "tenure": 8,
+  "monthly_charges": 79.5,
+  "contract_type": "Month-to-month",
+  "internet_service": "Fiber optic",
+  "payment_method": "Electronic check",
+  "tenure_in_months": 8,
+  "monthly_charge": 79.5,
+  "InternetService": "Fiber optic",
+  "PaymentMethod": "Electronic check"
+}

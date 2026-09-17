@@ -1,0 +1,5 @@
+model,accuracy,roc_auc,precision,recall,f1,confusion_matrix,model_path
+xgboost,0.9588360539389638,0.992619287504198,0.9136125654450262,0.9331550802139037,0.9232804232804233,"[[1002, 33], [25, 349]]",F:\project\churn-prediction\artifacts\trained_models\xgboost_optimized.joblib
+lightgbm,0.957416607523066,0.9924875351985325,0.904639175257732,0.9385026737967914,0.9212598425196851,"[[998, 37], [23, 351]]",F:\project\churn-prediction\artifacts\trained_models\lightgbm_optimized.joblib
+logistic_regression,0.9545777146912704,0.9923376992430701,0.8974358974358975,0.9358288770053476,0.9162303664921466,"[[995, 40], [24, 350]]",F:\project\churn-prediction\artifacts\trained_models\logistic_regression_optimized.joblib
+random_forest,0.907735982966643,0.9579865147640084,0.801980198019802,0.8663101604278075,0.8329048843187661,"[[955, 80], [50, 324]]",F:\project\churn-prediction\artifacts\trained_models\random_forest_optimized.joblib

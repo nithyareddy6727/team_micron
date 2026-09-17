@@ -1,0 +1,9 @@
+{
+  "model_version": "v1",
+  "customer_id": "4846-WHAFZ",
+  "prediction": 1,
+  "probability": 0.9959982633590698,
+  "latency_ms": 146.4706999977352,
+  "risk_level": "High",
+  "confidence_score": 0.9919965267181396
+}

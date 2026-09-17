@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  NODE_ENV: "staging"
+  BACKEND_PORT: "5055"
+  DB_HOST: "mysql"
+  DB_PORT: "3306"
+  DB_NAME: "churn_platform"
+  DB_USER: "churn_user"
+  MYSQL_HOST: "mysql"
+  MYSQL_PORT: "3306"
+  MYSQL_DATABASE: "churn_platform"
+  MYSQL_USER: "churn_user"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  ML_API_URL: "http://ml-service:8000"
+  CHURN_ML_API_URL: "http://ml-service:8000"
+  SCORING_QUEUE_NAME: "scoring-jobs"
+  SCORING_DLQ_NAME: "scoring-dlq"

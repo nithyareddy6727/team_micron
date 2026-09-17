@@ -1,0 +1,9 @@
+{
+  "model_version": "v1",
+  "customer_id": "3419-SNJJD",
+  "prediction": 1,
+  "probability": 0.9945486187934875,
+  "latency_ms": 99.59040000103414,
+  "risk_level": "High",
+  "confidence_score": 0.9890972375869751
+}

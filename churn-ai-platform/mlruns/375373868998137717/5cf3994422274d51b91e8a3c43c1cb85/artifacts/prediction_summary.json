@@ -1,0 +1,9 @@
+{
+  "model_version": "v1",
+  "customer_id": "NEW-1003",
+  "prediction": 1,
+  "probability": 0.6111118793487549,
+  "latency_ms": 386.7711999992025,
+  "risk_level": "Medium",
+  "confidence_score": 0.22222375869750977
+}

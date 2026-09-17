@@ -1,0 +1,15 @@
+{
+  "prediction_distribution": {
+    "probability_mean": 0.42,
+    "probability_variance": 0.06,
+    "positive_rate": 0.39
+  },
+  "feature_distribution": {
+    "age_mean": 41.0,
+    "age_variance": 132.0,
+    "tenure_mean": 22.5,
+    "tenure_variance": 180.0,
+    "monthly_charges_mean": 67.0,
+    "monthly_charges_variance": 520.0
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "fast_mode": false,
+  "n_iter": 30,
+  "cv": 5,
+  "test_size": 0.2,
+  "random_state": 42,
+  "best_model": "xgboost",
+  "best_model_metrics": {
+    "accuracy": 0.9588360539389638,
+    "roc_auc": 0.992619287504198,
+    "precision": 0.9136125654450262,
+    "recall": 0.9331550802139037,
+    "f1": 0.9232804232804233,
+    "confusion_matrix": [
+      [
+        1002,
+        33
+      ],
+      [
+        25,
+        349
+      ]
+    ]
+  },
+  "model_comparison": [
+    {
+      "model": "xgboost",
+      "cv_best_roc_auc": 0.9932805340167455,
+      "accuracy": 0.9588360539389638,
+      "roc_auc": 0.992619287504198,
+      "precision": 0.9136125654450262,
+      "recall": 0.9331550802139037,
+      "f1": 0.9232804232804233,
+      "confusion_matrix": [
+        [
+          1002,
+          33
+        ],
+        [
+          25,
+          349
+        ]
+      ],
+      "best_params": {
+        "model__colsample_bytree": 0.905269907953647,
+        "model__gamma": 0.02837635341868618,
+        "model__learning_rate": 0.014413697528610409,
+        "model__max_depth": 7,
+        "model__min_child_weight": 3,
+        "model__n_estimators": 355,
+        "model__reg_alpha": 0.019539020822744748,
+        "model__reg_lambda": 1.7262139284006215,
+        "model__subsample": 0.9266084230952957
+      }
+    },
+    {
+      "model": "random_forest",
+      "cv_best_roc_auc": 0.9612215828029929,
+      "accuracy": 0.907735982966643,
+      "roc_auc": 0.9579865147640084,
+      "precision": 0.801980198019802,
+      "recall": 0.8663101604278075,
+      "f1": 0.8329048843187661,
+      "confusion_matrix": [
+        [
+          955,
+          80
+        ],
+        [
+          50,
+          324
+        ]
+      ],
+      "best_params": {
+        "model__bootstrap": false,
+        "model__max_depth": 28,
+        "model__max_features": "sqrt",
+        "model__min_samples_leaf": 1,
+        "model__min_samples_split": 11,
+        "model__n_estimators": 241
+      }
+    },
+    {
+      "model": "logistic_regression",
+      "cv_best_roc_auc": 0.9927255166017586,
+      "accuracy": 0.9545777146912704,
+      "roc_auc": 0.9923376992430701,
+      "precision": 0.8974358974358975,
+      "recall": 0.9358288770053476,
+      "f1": 0.9162303664921466,
+      "confusion_matrix": [
+        [
+          995,
+          40
+        ],
+        [
+          24,
+          350
+        ]
+      ],
+      "best_params": {
+        "model__C": 0.9846738873614566,
+        "model__penalty": "l1",
+        "model__solver": "liblinear"
+      }
+    },
+    {
+      "model": "lightgbm",
+      "cv_best_roc_auc": 0.9934729507731201,
+      "accuracy": 0.957416607523066,
+      "roc_auc": 0.9924875351985325,
+      "precision": 0.904639175257732,
+      "recall": 0.9385026737967914,
+      "f1": 0.9212598425196851,
+      "confusion_matrix": [
+        [
+          998,
+          37
+        ],
+        [
+          23,
+          351
+        ]
+      ],
+      "best_params": {
+        "model__colsample_bytree": 0.7587948587257435,
+        "model__learning_rate": 0.011450964268326641,
+        "model__max_depth": 7,
+        "model__n_estimators": 357,
+        "model__num_leaves": 124,
+        "model__reg_lambda": 0.014691979880907806,
+        "model__subsample": 0.9486212527455787
+      }
+    }
+  ],
+  "runtime_seconds": 32533.28,
+  "shap_enabled": true,
+  "deep_learning_enabled": true,
+  "deep_learning_baseline": {
+    "enabled": true,
+    "metrics": {
+      "accuracy": 0.9524485450674237,
+      "roc_auc": 0.989769820971867,
+      "precision": 0.9115281501340483,
+      "recall": 0.9090909090909091,
+      "f1": 0.9103078982597055,
+      "confusion_matrix": [
+        [
+          1002,
+          33
+        ],
+        [
+          34,
+          340
+        ]
+      ]
+    },
+    "path": "F:\\project\\churn-prediction\\artifacts\\deep_learning_baseline.keras"
+  },
+  "artifacts": {
+    "best_model": "F:\\project\\churn-prediction\\artifacts\\churn_model_optimized.pkl",
+    "comparison": "F:\\project\\churn-prediction\\artifacts\\optimized_model_comparison.csv",
+    "metrics": "F:\\project\\churn-prediction\\artifacts\\optimized_metrics.json",
+    "preprocessor": "F:\\project\\churn-prediction\\artifacts\\optimized_preprocessing_pipeline.joblib",
+    "shap_plot": "F:\\project\\churn-prediction\\artifacts\\plots\\shap_summary_plot.png",
+    "deep_learning_model": "F:\\project\\churn-prediction\\artifacts\\deep_learning_baseline.keras"
+  }
+}

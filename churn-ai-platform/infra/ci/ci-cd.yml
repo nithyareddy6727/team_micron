@@ -1,0 +1,206 @@
+name: CI-CD Pipeline
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+    tags:
+      - v*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Backend install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r churn-ai-platform/requirements.txt
+
+      - name: Backend tests
+        run: pytest churn-ai-platform/backend/tests -q
+
+      - name: Backend lint
+        run: python -m compileall churn-ai-platform/backend
+
+      - name: Backend syntax check
+        run: python -m compileall churn-ai-platform/backend
+
+      - name: Frontend install
+        working-directory: churn-ai-platform/frontend
+        run: npm ci
+
+      - name: Frontend lint
+        working-directory: churn-ai-platform/frontend
+        run: npm run lint
+
+      - name: Frontend build
+        working-directory: churn-ai-platform/frontend
+        run: npm run build
+
+      - name: ML dependencies
+        working-directory: churn-ai-platform/apps/ml-service
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: ML lint and test gate
+        working-directory: churn-ai-platform/apps/ml-service
+        run: |
+          python -m compileall app scripts
+
+  build-images:
+    needs: ci
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.meta.outputs.image_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve image tag
+        id: meta
+        run: echo "image_tag=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: churn-ai-platform/backend
+          push: true
+          tags: ${{ env.REGISTRY }}/churn-backend:${{ steps.meta.outputs.image_tag }}
+
+      - name: Build and push ml-service image
+        uses: docker/build-push-action@v6
+        with:
+          context: churn-ai-platform/apps/ml-service
+          push: true
+          tags: ${{ env.REGISTRY }}/churn-ml-service:${{ steps.meta.outputs.image_tag }}
+
+      - name: Build and push worker image
+        uses: docker/build-push-action@v6
+        with:
+          context: churn-ai-platform/backend
+          push: true
+          tags: ${{ env.REGISTRY }}/churn-worker:${{ steps.meta.outputs.image_tag }}
+
+  deploy-staging:
+    needs: build-images
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Load staging environment config
+        run: cat .github/env/staging.env >> "$GITHUB_ENV"
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          echo "${{ secrets.KUBE_CONFIG_STAGING }}" | base64 -d > "$HOME/.kube/config"
+
+      - name: Deploy Kubernetes manifests (staging)
+        run: |
+          kubectl apply -f churn-ai-platform/infra/k8s/namespace.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/configmap-staging.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/secrets-staging.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/mysql-statefulset.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/redis-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/ml-service-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/backend-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/worker-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/worker-hpa.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/services.yaml
+
+      - name: Update images (staging)
+        run: |
+          TAG="${{ needs.build-images.outputs.image_tag }}"
+          kubectl -n "$K8S_NAMESPACE" set image deployment/backend backend=${{ env.REGISTRY }}/churn-backend:$TAG
+          kubectl -n "$K8S_NAMESPACE" set image deployment/ml-service ml-service=${{ env.REGISTRY }}/churn-ml-service:$TAG
+          kubectl -n "$K8S_NAMESPACE" set image deployment/worker worker=${{ env.REGISTRY }}/churn-worker:$TAG
+
+      - name: Verify rollout (staging)
+        run: |
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/backend --timeout=300s
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/ml-service --timeout=300s
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/worker --timeout=300s
+
+  deploy-production:
+    needs: build-images
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Load production environment config
+        run: cat .github/env/production.env >> "$GITHUB_ENV"
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          echo "${{ secrets.KUBE_CONFIG_PRODUCTION }}" | base64 -d > "$HOME/.kube/config"
+
+      - name: Deploy Kubernetes manifests (production)
+        run: |
+          kubectl apply -f churn-ai-platform/infra/k8s/namespace.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/configmap-production.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/secrets-production.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/mysql-statefulset.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/redis-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/ml-service-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/backend-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/worker-deployment.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/worker-hpa.yaml
+          kubectl -n "$K8S_NAMESPACE" apply -f churn-ai-platform/infra/k8s/services.yaml
+
+      - name: Update images (production)
+        run: |
+          TAG="${{ needs.build-images.outputs.image_tag }}"
+          kubectl -n "$K8S_NAMESPACE" set image deployment/backend backend=${{ env.REGISTRY }}/churn-backend:$TAG
+          kubectl -n "$K8S_NAMESPACE" set image deployment/ml-service ml-service=${{ env.REGISTRY }}/churn-ml-service:$TAG
+          kubectl -n "$K8S_NAMESPACE" set image deployment/worker worker=${{ env.REGISTRY }}/churn-worker:$TAG
+
+      - name: Verify rollout (production)
+        run: |
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/backend --timeout=300s
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/ml-service --timeout=300s
+          kubectl -n "$K8S_NAMESPACE" rollout status deployment/worker --timeout=300s

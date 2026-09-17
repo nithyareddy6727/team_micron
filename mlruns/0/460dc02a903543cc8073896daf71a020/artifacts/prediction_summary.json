@@ -1,0 +1,9 @@
+{
+  "model_version": "churn_model_optimized-82b32a7f6e0d",
+  "customer_id": "CUST-SAAS-101",
+  "prediction": 0,
+  "probability": 0.499152958393097,
+  "latency_ms": 184.19219995848835,
+  "risk_level": "Medium",
+  "confidence_score": 0.0016940832138060413
+}

@@ -1,0 +1,8 @@
+# Run drift detection + conditional retraining every hour
+# Usage:
+#   crontab scripts/mlops.cron
+#
+# Make sure working directory and python executable are adjusted for your environment.
+
+0 * * * * cd /opt/churn-ai-platform/apps/ml-service && /usr/bin/python3 scripts/drift_detection.py --compare-days 14 >> /var/log/churn-drift.log 2>&1
+5 * * * * cd /opt/churn-ai-platform/apps/ml-service && /usr/bin/python3 scripts/retrain_model.py >> /var/log/churn-retrain.log 2>&1

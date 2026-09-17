@@ -1,0 +1,67 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: churn-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Yashraj@123}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-churn_platform}
+      MYSQL_USER: ${MYSQL_USER:-churn_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-churn_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/migrations/mysql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-Yashraj@123}"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  ml-service:
+    build:
+      context: ./apps/ml-service
+      dockerfile: Dockerfile
+    container_name: churn-ml-service
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-churn_platform}
+      MYSQL_USER: ${MYSQL_USER:-churn_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-churn_password}
+      MODEL_ARTIFACT_DIR: artifacts
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: churn-backend
+    environment:
+      NODE_ENV: production
+      BACKEND_PORT: 5055
+      DB_HOST: mysql
+      DB_USER: ${MYSQL_USER:-churn_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-churn_password}
+      DB_NAME: ${MYSQL_DATABASE:-churn_platform}
+      ML_API_URL: http://ml-service:8000
+      DB_PATH: /app/database/churn.db
+    ports:
+      - "5055:5055"
+    volumes:
+      - ./database:/app/database
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ml-service:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

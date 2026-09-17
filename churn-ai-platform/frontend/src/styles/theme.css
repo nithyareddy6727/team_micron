@@ -1,0 +1,50 @@
+:root {
+  --color-primary: #0A84FF;
+  --color-background: #F5F5F7;
+  --color-surface: #FFFFFF;
+  --color-text: #1D1D1F;
+  --color-gradient-start: #0A84FF;
+  --color-gradient-end: #5E5CE6;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: "SF Pro Display", "Avenir Next", "Segoe UI", sans-serif;
+  color: var(--color-text);
+  background:
+    radial-gradient(1200px 560px at -10% -15%, rgba(10, 132, 255, 0.2), transparent 62%),
+    radial-gradient(900px 580px at 110% -10%, rgba(94, 92, 230, 0.16), transparent 65%),
+    linear-gradient(180deg, #f8f9ff 0%, var(--color-background) 56%, #edf2fb 100%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body {
+  color: #edf0fa;
+  background:
+    radial-gradient(1200px 560px at -10% -15%, rgba(10, 132, 255, 0.24), transparent 62%),
+    radial-gradient(900px 580px at 110% -10%, rgba(94, 92, 230, 0.21), transparent 65%),
+    linear-gradient(180deg, #0d111c 0%, #0b1328 56%, #10142a 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stagger-fade {
+    animation: riseIn 420ms ease-out both;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

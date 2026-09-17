@@ -1,0 +1,9 @@
+{
+  "model_version": "v1",
+  "customer_id": "8779-QRDMV",
+  "prediction": 1,
+  "probability": 0.9106982946395875,
+  "latency_ms": 368.75890000374056,
+  "risk_level": "High",
+  "confidence_score": 0.821396589279175
+}

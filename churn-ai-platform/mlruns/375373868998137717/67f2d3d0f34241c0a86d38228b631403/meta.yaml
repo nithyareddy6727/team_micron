@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/67f2d3d0f34241c0a86d38228b631403/artifacts
+end_time: 1775455724556
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: 67f2d3d0f34241c0a86d38228b631403
+run_name: predict-8779-QRDMV
+run_uuid: 67f2d3d0f34241c0a86d38228b631403
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775455724487
+status: 3
+tags: []
+user_id: Yashraj

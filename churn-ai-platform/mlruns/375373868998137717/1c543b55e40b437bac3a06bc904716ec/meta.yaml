@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/1c543b55e40b437bac3a06bc904716ec/artifacts
+end_time: 1775455879322
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: 1c543b55e40b437bac3a06bc904716ec
+run_name: predict-4846-WHAFZ
+run_uuid: 1c543b55e40b437bac3a06bc904716ec
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775455879257
+status: 3
+tags: []
+user_id: Yashraj

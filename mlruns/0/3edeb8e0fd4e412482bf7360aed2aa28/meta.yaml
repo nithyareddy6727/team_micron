@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Nithya/Downloads/customer-churn-prediction-main/customer-churn-prediction-main/mlruns/0/3edeb8e0fd4e412482bf7360aed2aa28/artifacts
+end_time: 1789630843715
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3edeb8e0fd4e412482bf7360aed2aa28
+run_name: predict-CUST-CONS-303
+run_uuid: 3edeb8e0fd4e412482bf7360aed2aa28
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1789630843641
+status: 3
+tags: []
+user_id: Nithya

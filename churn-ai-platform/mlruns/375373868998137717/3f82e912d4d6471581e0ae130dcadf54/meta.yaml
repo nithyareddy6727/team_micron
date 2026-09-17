@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/3f82e912d4d6471581e0ae130dcadf54/artifacts
+end_time: 1781360461187
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: 3f82e912d4d6471581e0ae130dcadf54
+run_name: predict-NEW-1001
+run_uuid: 3f82e912d4d6471581e0ae130dcadf54
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1781360461128
+status: 3
+tags: []
+user_id: Yashraj

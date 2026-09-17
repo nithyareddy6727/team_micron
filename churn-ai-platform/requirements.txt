@@ -1,0 +1,15 @@
+fastapi==0.115.12
+prometheus-fastapi-instrumentator
+python-dotenv
+uvicorn[standard]==0.34.0
+pydantic==2.10.6
+pandas==2.2.3
+joblib==1.4.2
+scikit-learn==1.6.1
+mlflow==2.16.2
+shap==0.51.0
+mysql-connector-python==9.6.0
+python-multipart==0.0.20
+xgboost>=2.0.0
+pytest
+httpx

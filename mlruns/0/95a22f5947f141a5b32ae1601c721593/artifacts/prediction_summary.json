@@ -1,0 +1,9 @@
+{
+  "model_version": "churn_model_optimized-82b32a7f6e0d",
+  "customer_id": "CUST-TELCO-202",
+  "prediction": 0,
+  "probability": 0.32390549778938293,
+  "latency_ms": 283.3387000137009,
+  "risk_level": "Medium",
+  "confidence_score": 0.35218900442123413
+}

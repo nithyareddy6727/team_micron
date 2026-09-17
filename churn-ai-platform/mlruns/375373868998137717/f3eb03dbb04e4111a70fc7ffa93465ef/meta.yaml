@@ -1,0 +1,15 @@
+artifact_uri: file:F:\project\churn-prediction\churn-ai-platform\mlruns/375373868998137717/f3eb03dbb04e4111a70fc7ffa93465ef/artifacts
+end_time: 1775453022180
+entry_point_name: ''
+experiment_id: '375373868998137717'
+lifecycle_stage: active
+run_id: f3eb03dbb04e4111a70fc7ffa93465ef
+run_name: predict-SMOKE-001
+run_uuid: f3eb03dbb04e4111a70fc7ffa93465ef
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1775453022066
+status: 3
+tags: []
+user_id: Yashraj

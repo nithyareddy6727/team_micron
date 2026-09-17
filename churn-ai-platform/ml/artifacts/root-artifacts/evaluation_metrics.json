@@ -1,0 +1,101 @@
+{
+  "target": "churn_label",
+  "test_size": 0.2,
+  "random_state": 42,
+  "best_model": "xgboost",
+  "best_metrics": {
+    "accuracy": 0.9588360539389638,
+    "roc_auc": 0.992619287504198,
+    "precision": 0.9136125654450262,
+    "recall": 0.9331550802139037,
+    "f1": 0.9232804232804233,
+    "confusion_matrix": [
+      [
+        1002,
+        33
+      ],
+      [
+        25,
+        349
+      ]
+    ]
+  },
+  "model_results": [
+    {
+      "model": "xgboost",
+      "accuracy": 0.9588360539389638,
+      "roc_auc": 0.992619287504198,
+      "precision": 0.9136125654450262,
+      "recall": 0.9331550802139037,
+      "f1": 0.9232804232804233,
+      "confusion_matrix": [
+        [
+          1002,
+          33
+        ],
+        [
+          25,
+          349
+        ]
+      ],
+      "model_path": "F:\\project\\churn-prediction\\artifacts\\trained_models\\xgboost_optimized.joblib"
+    },
+    {
+      "model": "random_forest",
+      "accuracy": 0.907735982966643,
+      "roc_auc": 0.9579865147640084,
+      "precision": 0.801980198019802,
+      "recall": 0.8663101604278075,
+      "f1": 0.8329048843187661,
+      "confusion_matrix": [
+        [
+          955,
+          80
+        ],
+        [
+          50,
+          324
+        ]
+      ],
+      "model_path": "F:\\project\\churn-prediction\\artifacts\\trained_models\\random_forest_optimized.joblib"
+    },
+    {
+      "model": "logistic_regression",
+      "accuracy": 0.9545777146912704,
+      "roc_auc": 0.9923376992430701,
+      "precision": 0.8974358974358975,
+      "recall": 0.9358288770053476,
+      "f1": 0.9162303664921466,
+      "confusion_matrix": [
+        [
+          995,
+          40
+        ],
+        [
+          24,
+          350
+        ]
+      ],
+      "model_path": "F:\\project\\churn-prediction\\artifacts\\trained_models\\logistic_regression_optimized.joblib"
+    },
+    {
+      "model": "lightgbm",
+      "accuracy": 0.957416607523066,
+      "roc_auc": 0.9924875351985325,
+      "precision": 0.904639175257732,
+      "recall": 0.9385026737967914,
+      "f1": 0.9212598425196851,
+      "confusion_matrix": [
+        [
+          998,
+          37
+        ],
+        [
+          23,
+          351
+        ]
+      ],
+      "model_path": "F:\\project\\churn-prediction\\artifacts\\trained_models\\lightgbm_optimized.joblib"
+    }
+  ]
+}
